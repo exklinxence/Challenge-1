@@ -1,0 +1,16 @@
+{
+    "name": "docker_simple_web_app",
+    "version": "1.0.0",
+    "description": "Node.js on Docker",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "axios": "^0.26.1",
+        "express": "^4.16.1",
+        "http": "^0.0.1-security",
+        "https": "^1.0.0",
+        "node-fetch": "^3.2.3"
+    }
+}
