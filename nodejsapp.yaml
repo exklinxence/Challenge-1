@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: "2022-03-27T14:59:28Z"
+  labels:
+    kubernetes.io/metadata.name: sample
+  name: sample
+  uid: 5749d682-d0da-4022-b599-d2258fcd3934
+spec:
+  finalizers:
+  - kubernetes
+status:
+  phase: Active
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nodejs-app
+  namespace: sample
+  labels:
+    app: nodejs-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs-app
+  template:
+    metadata:
+      labels:
+        app: nodejs-app
+    spec:
+      containers:
+      - name: nodejs-app
+        image: "klinz01/simple-web-app:latest"
+        ports:
+          - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-app
+  namespace: sample
+spec:
+  selector:
+    app: nodejs-app
+  type: LoadBalancer
+  ports:
+  - name: http
+    targetPort: 3000
+    port: 80
